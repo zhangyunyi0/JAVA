@@ -1,6 +1,6 @@
-##35.Java中IO流
+## 35.Java中IO流
 
-##Java中IO流分为几种？
+## Java中IO流分为几种？
 
  - 按照流的流向分，可以分为输入流和输出流；
  - 按照操作单元划分，可以划分为字节流和字符流；
@@ -15,21 +15,21 @@ Java IO流共涉及40多个类，这些类看上去很杂乱，但实际上很�
 
 按操作对象分类结构图：![](https://camo.githubusercontent.com/4a44e49ab13eacac26cbb0e481db73d6d11181b7/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d362f494f2d2545362539332538442545342542442539432545352541462542392545382542312541312545352538382538362545372542312542422e706e67)
 
-###既然有了字节流，为什么还要有字符流？
+### 既然有了字节流，为什么还要有字符流？
 
-问题本质想问：**不管是文件读写还是网络发送接收，信息的最小存储单元都是字节，那为什么I/O流操作要分为字节流操作和字符流操作呢？**
+问题本质想问：**不管是文件读写还是网络发送接收，信息的最小存储单元都是字节，那为什么I/O流操作要分为字节流操作和字符流操作呢？** 
 
 回答：字符流是由Java虚拟机将字节转换得到的，问题就出在这个过程还算是非常耗时，并且，如果我们不知道编码类型就很容易出现乱码问题。所以，I/O流就干脆提供了一个直接操作字符的接口，方便我们平时对字符进行流操作。如果音频文件、图片等媒体文件用字节流比较好，如果涉及到字符的话使用字符流比较好。
 
-###BIO，NIO，AIO有什么区别？
+### BIO，NIO，AIO有什么区别？
 
  - BIO（Blocking I/O）：同步阻塞I/O模式，数据的读取写入必须阻塞在一个线程内等待其完成。在活动连接数不是特别高（小于单机1000）的情况下，这种模型是比较不错的，可以让每一个连接专注于自己的I/O并且编程模型简单，也不用过多考虑系统的过载、限流等问题。线程池本身就是一个天然的漏斗，可以缓冲一些系统处理不了的连接或请求。但是，当面对十万甚至百万级连接的时候，传统的BIO模型是无能为力的。因此，我们需要一种更高效的I/O处理模型来应对更高的并发量。
  - NIO（New I/O）：NIO是一种同步非阻塞的I/O模型，在Java1.4中引入了NIO框架，对应java.nio包，提供了Channel,Selector,Buffer等抽象。NIO中的N可以理解为Non-blocking，不单纯是New。它支持面向缓冲的，基于通道的I/O操作方法。NIO提供了与传统BIO模型中的`Socket`和`ServerSocket`相对应的`SocketChannel`和`ServerSocketChannel`两种不同的套接字通道实现，两种通道都支持阻塞和非阻塞两种模式。阻塞模式使用就像传统中的支持一样，比较简单，但是性能和可靠性都不好；非阻塞模式正好与之相反。对于低负载、低并发的应用程序，可以使用同步阻塞I/O来提升开发速率和更好地维护性；对于高负载、高并发的（网络）应用，应使用NIO的非阻塞模式来开发
  - AIO（Asynchronous I/O）：AIO也就是NIO 2。在Java 7中引入了NIO的改进版NIO 2，它是异步非阻塞的IO模型。异步IO是基于事件和回调机制实现的，也就是应用操作之后会直接返回，不会堵塞在那里，当后台处理完成，操作系统会通知相应的线程进行后续的操作。AIO是异步IO的缩写，虽然NIO在网络操作中，提供了非阻塞的方法，但是NIO的IO行为还是同步的。对于NIO来说，我们的业务线程是在IO操作准备好时，得到通知，接着就由这个线程自行进行IO操作，IO操作本身是同步的。查阅网上相关资料，我发现就目前来说AIO的应用还不是很广泛，Netty之前也尝试使用过AIO，不过又放弃了。
 
-##36.Collections工具类和Arrays工具类常见方法总结
+## 36.Collections工具类和Arrays工具类常见方法总结
 
-###Collections
+### Collections
 
 Collections工具类常用方法：
 
@@ -145,7 +145,7 @@ Collections提供了多个`synchronizedXxx()`方法，该方法可以将指定�
 
 我们知道HashSet,TreeSet,ArrayList,LinkedList,HashMap,TreeMap都是线程不安全的。Collections提供了多个静态方法可以把他们包装成线程同步的集合。
 
-**最好不要用下面这些方法，效率非常低，需要线程安全的集合类型时请考虑使用JUC包下的并发集合**。
+**最好不要用下面这些方法，效率非常低，需要线程安全的集合类型时请考虑使用JUC包下的并发集合** 。
 
 方法如下：
 
@@ -154,7 +154,7 @@ Collections提供了多个`synchronizedXxx()`方法，该方法可以将指定�
 	synchronizedMap(Map<K,V> m)//返回由指定映射支持的同步（线程安全的）Map
 	synchronizedSet(Set<T> s)//返回指定Set支持的同步（线程安全的）Set
 
-###Collections还可以设置不可变集合，提供了如下三类方法：
+### Collections还可以设置不可变集合，提供了如下三类方法：
 
 	emptyXxx():返回一个空的、不可变的集合对象，此处的集合既可以是List,也可以是Set，还可以是Map
 	singletonXxx():返回一个只包含指定对象（只有一个或一个元素）的不可变的集合对象，此处的集合可以是：List,Set,Map
@@ -210,7 +210,7 @@ Collections提供了多个`synchronizedXxx()`方法，该方法可以将指定�
 		//arrayLists.add(arrayList);
 		//integers.add(1);
 
-##Arrays类的常见操作
+## Arrays类的常见操作
 
 1. 排序：`sort()`
 2. 查找：`binarySearch()`
@@ -220,7 +220,7 @@ Collections提供了多个`synchronizedXxx()`方法，该方法可以将指定�
 6. 转字符串：`toString()`
 7. 复制：`copyOf()`
 
-###排序：sort()
+### 排序：sort()
 
 		// *************排序 sort****************
 		int a[] = { 1, 3, 2, 7, 6, 5, 4, 9 };
@@ -268,7 +268,7 @@ Collections提供了多个`synchronizedXxx()`方法，该方法可以将指定�
 	Arrays.sort(strs);
 	System.out.println(Arrays.toString(strs));//[abcdeag, abcdefg, abcdehg]
 
-###查找：binarySearch()
+### 查找：binarySearch()
 
 		// *************查找 binarySearch()****************
 		char[] e = { 'a', 'f', 'b', 'c', 'e', 'A', 'C', 'B' };
@@ -279,7 +279,7 @@ Collections提供了多个`synchronizedXxx()`方法，该方法可以将指定�
 		int s = Arrays.binarySearch(e, 'c');
 		System.out.println("字符c在数组的位置：" + s);
 
-###比较：equals()
+### 比较：equals()
 
 		// *************比较 equals****************
 		char[] e = { 'a', 'f', 'b', 'c', 'e', 'A', 'C', 'B' };
@@ -290,7 +290,7 @@ Collections提供了多个`synchronizedXxx()`方法，该方法可以将指定�
 		// 输出true
 		System.out.println("Arrays.equals(e, f):" + Arrays.equals(e, f));
 
-###填充：fill()
+### 填充：fill()
 
 		// *************填充fill(批量初始化)****************
 		int[] g = { 1, 2, 3, 3, 3, 3, 6, 6, 6 };
@@ -313,7 +313,7 @@ Collections提供了多个`synchronizedXxx()`方法，该方法可以将指定�
 			System.out.print(i);
 		}
 
-###转列表：asList()
+### 转列表：asList()
 
 		// *************转列表 asList()****************
 		/*
@@ -325,7 +325,7 @@ Collections提供了多个`synchronizedXxx()`方法，该方法可以将指定�
 		List<String> stooges = Arrays.asList("Larry", "Moe", "Curly");
 		System.out.println(stooges);
 
-###转字符串：toString()
+### 转字符串：toString()
 
 		// *************转字符串 toString()****************
 		/*
@@ -334,7 +334,7 @@ Collections提供了多个`synchronizedXxx()`方法，该方法可以将指定�
 		char[] k = { 'a', 'f', 'b', 'c', 'e', 'A', 'C', 'B' };
 		System.out.println(Arrays.toString(k));// [a, f, b, c, e, A, C, B]
 
-###复制：copyOf()
+### 复制：copyOf()
 
 		// *************复制 copy****************
 		// copyOf 方法实现数组复制,h为数组，6为复制的长度
